@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
@@ -45,26 +44,6 @@ public class Controller {
         FileChooser fileChooser = new FileChooser();
         File file = new File("C:\\Users\\rica\\Desktop");
         fileChooser.setInitialDirectory(file);
-
-
-//        btn_selected.setOnAction(e->{
-//            selected = fileChooser.showOpenDialog(References.getStage());
-//            if (selected != null) {
-//                setFileToProcess(selected.toString());
-//            } else {
-//                return;
-//            }
-//        });
-//
-//        tf_file.setOnDragOver(e->{
-//            e.acceptTransferModes(TransferMode.ANY);
-//            Dragboard dragboard = e.getDragboard();
-//            fromDrag = dragboard.getFiles();
-//            for (File f: fromDrag) {
-//                setFileToProcess(f.toString());
-//            }
-//            e.consume();
-//        });
 
         stringProperty.addListener(new ChangeListener<String>() {
             @Override
@@ -103,7 +82,6 @@ public class Controller {
     }
 
     private void setFileToProcess(String file) {
-//        tf_file.setText(file);
         stringProperty.set(file);
     }
 
@@ -181,7 +159,10 @@ public class Controller {
             case ".jpg":
             case ".png":
             case ".gif":
+            case ".tif":
+            case ".tiff":
             case ".jpeg":
+            case ".bmp":
                 toAssign = References.getFolders() + "_img/";
                 process = true;
                 break;
