@@ -1,0 +1,37 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ListView?>
+<BorderPane fx:controller="sample.Controller"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <MenuItem text="boom"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <GridPane BorderPane.alignment="TOP_CENTER" hgap="10" vgap="10">
+            <padding>
+                <Insets top="10" bottom="10" right="10" left="10"/>
+            </padding>
+            <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Selected File:"/>
+            <!--<TextField fx:id="tf_file" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="250" promptText="select"/>-->
+            <!--<Button fx:id="btn_selected" GridPane.rowIndex="1" GridPane.columnIndex="1" text="Select File"/>-->
+            <Button fx:id="btn_openfolder" GridPane.rowIndex="1" GridPane.columnIndex="0" text="Open Folder"/>
+            <ListView fx:id="listView" minWidth="450" maxHeight="150" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.columnIndex="0"/>
+        </GridPane>
+    </center>
+
+</BorderPane>
