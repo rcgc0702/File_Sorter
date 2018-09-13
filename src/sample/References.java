@@ -31,7 +31,9 @@ public abstract class References {
 
         if(Files.notExists(path)) {
             for (String s: typesOfFiles) {
-                new File(folders + s).mkdirs();
+                if (Files.notExists(Paths.get(folders + s))) {
+                    new File(folders + s).mkdirs();
+                }
             }
         }
         return true;
@@ -55,7 +57,7 @@ public abstract class References {
         folders = rootDrive + ":/" + References.username + "/" + References.username;
     }
 
-    private static String getRootDrive() {
+    public static String getRootDrive() {
 
         //[a-zA-Z]{1,1}(?=\:)
         File[] afile = File.listRoots();
@@ -68,4 +70,5 @@ public abstract class References {
         }
         return match;
     }
+
 }

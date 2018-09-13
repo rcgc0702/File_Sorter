@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.File;
@@ -32,30 +31,24 @@ public class Controller {
     Button btn_openfolder;
     @FXML
     ListView<String> listView;
-    private File selected;
     private List<File> fromDrag;
     private StringProperty stringProperty = new SimpleStringProperty();
     private ObservableList<String> myfiles = FXCollections.observableArrayList();
-    Dragboard dragboard;
+    private Dragboard dragboard;
 
 
     public void initialize() {
 
-        FileChooser fileChooser = new FileChooser();
-        File file = new File("C:\\Users\\rica\\Desktop");
-        fileChooser.setInitialDirectory(file);
-
         stringProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println(newValue);
-                routeToFolder();
+                matchToFolder();
             }
         });
 
         btn_openfolder.setOnAction(e-> {
 
-            File file1 = new File("c:/" + References.getUsername());
+            File file1 = new File(References.getRootDrive() + ":/" + References.getUsername());
             Desktop desktop = Desktop.getDesktop();
             try {
                 desktop.open(file1);
@@ -85,7 +78,7 @@ public class Controller {
         stringProperty.set(file);
     }
 
-    private void routeToFolder() {
+    private void matchToFolder() {
 
         //\.[a-zA-Z]{3,4}
         Pattern pattern = Pattern.compile("\\.[a-zA-Z0-9 _]{2,4}");
@@ -101,7 +94,7 @@ public class Controller {
 
     }
 
-    private String getNameOfFile() {
+    private String getFilename() {
 
         //[a-zA-Z0-9 \-]*(?=\.)
         //[a-zA-Z0-9]*(?=\.)
@@ -141,8 +134,9 @@ public class Controller {
 
         String toAssign = "";
         String saveName = saveString();
-        String fileName = getNameOfFile();
+        String fileName = getFilename();
         boolean process = false;
+
         switch (fileExtension.toLowerCase()) {
             case ".docx":
             case ".doc":
@@ -190,6 +184,7 @@ public class Controller {
             default:
                 toAssign = References.getFolders() + "_misc/";
                 process = true;
+                break;
         }
         if (process) {
             Path target = Paths.get(toAssign + saveName + fileName + fileExtension);
